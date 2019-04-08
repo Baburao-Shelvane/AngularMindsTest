@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <h1>My Interview Portal</h1>
+        <hr>
+  
+        <div class="col-md-12">
+          <div class="panel panel-default" *ngFor="let test of testDetails; let i = index">
+            <form (ngSubmit)="onSubmit(questionForm.value,test.questions[currentIndex])" #questionForm ="ngForm">
+              <div class="panel-heading">{{test.name}}</div>
+              <div class="panel-body">
+                  
+                      <label>{{test.questions[currentIndex].name}}</label>
+                      <div class="radio" *ngFor="let queOption of test.questions[currentIndex].options; let j = index">
+                          <label>
+                              <input type="radio" name="option" value="{{j+1}}" ngModel required #myOption="ngModel"> {{queOption}}
+                          </label>
+                      </div>
+              </div>
+              <div class="panel-footer">
+                  
+                  <button type="submit" class="btn btn-success" [disabled]=!(questionForm.form.valid)>Next</button>
+                  <button type="submit" class="pull-right btn btn-danger" *ngIf="currentIndex == noOfQuestions-1" [disabled]=!(questionForm.form.valid)>Finish</button>
+              </div>
+          </form>
+          </div>
+        </div>
+    </div>
+</div>
